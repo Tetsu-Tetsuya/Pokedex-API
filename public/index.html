@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pokédex Explorer</title>
+  <meta name="description" content="Explore Pokémon com dados da PokéAPI v2 através de um backend Node.js + Express." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <p class="eyebrow">Laboratório de APIs</p>
+      <h1>Pokédex Explorer</h1>
+      <nav aria-label="Seções">
+        <a href="#busca">Buscar</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#favoritos">Favoritos</a>
+        <a href="#comparar">Comparar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo" class="wrap">
+    <!-- Atividades 01, 02, 08, 16 — busca por nome/número e aleatória -->
+    <section id="busca" class="card" aria-labelledby="busca-titulo">
+      <p class="eyebrow accent">Explore a PokéAPI</p>
+      <h2 id="busca-titulo">Encontre seu Pokémon</h2>
+      <p class="muted">Pesquise pelo nome ou número e descubra o que há por trás de cada espécie.</p>
+      <form id="search-form" class="search" novalidate>
+        <label for="search-input" class="sr-only">Nome ou número do Pokémon</label>
+        <input id="search-input" name="q" type="search" placeholder="Ex.: pikachu ou 25" autocomplete="off" required />
+        <button type="submit" class="btn primary">Pesquisar</button>
+        <button type="button" id="random-btn" class="btn outline">↗ Aleatório</button>
+      </form>
+      <p id="search-status" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <!-- Atividades 03, 04, 05, 06, 07, 14, 15 — detalhes -->
+    <section id="detalhes" class="card detail" aria-live="polite" hidden></section>
+
+    <!-- Atividades 10 e 11 — catálogo paginado com filtros -->
+    <section id="catalogo" class="card" aria-labelledby="catalogo-titulo">
+      <h2 id="catalogo-titulo">Catálogo</h2>
+      <p class="muted">12 Pokémon por página · escolha um cartão para ver detalhes.</p>
+      <div class="filters" role="group" aria-label="Filtrar por tipo">
+        <button type="button" class="chip" data-type="" aria-pressed="true">Todos</button>
+        <button type="button" class="chip" data-type="fire" aria-pressed="false">Fogo</button>
+        <button type="button" class="chip" data-type="water" aria-pressed="false">Água</button>
+        <button type="button" class="chip" data-type="grass" aria-pressed="false">Planta</button>
+      </div>
+      <p id="catalog-status" class="status" role="status" aria-live="polite"></p>
+      <ul id="catalog-grid" class="grid"></ul>
+      <nav class="pagination" aria-label="Paginação do catálogo">
+        <button type="button" id="prev-btn" class="btn outline">← Anterior</button>
+        <span id="page-info">Página 1</span>
+        <button type="button" id="next-btn" class="btn outline">Próxima →</button>
+      </nav>
+    </section>
+
+    <!-- Atividades 12 e 18 — favoritos (salvos no serviço de favoritos) -->
+    <section id="favoritos" class="card" aria-labelledby="favoritos-titulo">
+      <h2 id="favoritos-titulo">Favoritos</h2>
+      <p id="favorites-status" class="status" role="status" aria-live="polite"></p>
+      <ul id="favorites-grid" class="grid"></ul>
+    </section>
+
+    <!-- Atividade 13 — comparação -->
+    <section id="comparar" class="card" aria-labelledby="comparar-titulo">
+      <h2 id="comparar-titulo">Comparar dois Pokémon</h2>
+      <form id="compare-form" class="compare-form" novalidate>
+        <label>Primeiro <input name="a" type="text" placeholder="pikachu" required /></label>
+        <span class="vs" aria-hidden="true">vs</span>
+        <label>Segundo <input name="b" type="text" placeholder="charmander" required /></label>
+        <button type="submit" class="btn primary">Comparar</button>
+      </form>
+      <p id="compare-status" class="status" role="status" aria-live="polite"></p>
+      <div id="compare-result"></div>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    Pokédex Explorer · Dados dinâmicos: <a href="https://pokeapi.co/docs/v2" target="_blank" rel="noopener">PokéAPI v2</a>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
